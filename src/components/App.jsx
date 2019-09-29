@@ -7,9 +7,7 @@ export default class App extends React.Component {
 		this.state = {
 			firstPage: true
 		};
-		this.usernameFetch = this.usernameFetch.bind(this);
 	}
-
 
 	render() {
 		return (
