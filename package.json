@@ -1,31 +1,32 @@
 {
-  "name": "restaurant_finder",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "hp-project",
+	"author": "Chris Huang",
+	"version": "1.0.0",
+	"dependencies": {
+		"axios": "^0.19.0",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"live-server": "^1.2.1",
+		"mongo": "^0.1.0",
+		"mongoose": "^5.7.1",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"react-scripts": "3.0.1",
+		"webpack": "^4.38.0"
+	},
+	"scripts": {
+		"react-dev": "webpack -d -w",
+		"server-dev": "nodemon server/index.js",
+		"build": "webpack -d",
+		"start": "node"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.5.5",
+		"@babel/preset-env": "^7.5.5",
+		"@babel/preset-react": "^7.0.0",
+		"babel-loader": "^8.0.6",
+		"nodemon": "^1.19.2",
+		"webpack-cli": "^3.3.6"
+	}
 }
