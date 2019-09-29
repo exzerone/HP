@@ -17,7 +17,7 @@ const Container = styled.div`
 	flex-direction: column;
 	justify-content: space-evenly;
 	width: 500px;
-	height: 250px;
+	height: 220px;
 	background-color: white;
 	text-align: center;
 	vertical-align: center;
@@ -30,8 +30,8 @@ const Container = styled.div`
 
 const Greeting = styled.div`
 	font-size: 23px;
-	font-family: sans-serif;
-	font-weight: light;
+	font-family: lato;
+	font-weight: lighter;
 `;
 
 const InputForm = styled.form`
@@ -39,25 +39,29 @@ const InputForm = styled.form`
 `;
 
 const Prompt = styled.label`
-	font-size: 15px;
+	font-size: 23px;
+	font-weight: lighter;
+	font-family: lato;
 `;
 
 export default class Frontpage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: null
+			query: null
 		};
 		this.userInput = this.userInput.bind(this);
+		this.userSubmit = this.userSubmit.bind(this);
 	}
 
 	userInput(e) {
 		e.preventDefault();
-		this.setState({ username: e.target.value });
+		this.setState({ query: e.target.value });
 	}
 
 	userSubmit(e) {
 		e.preventDefault();
+		this.props.usernameFetch(this.state.query)
 	}
 
 	render() {
@@ -67,7 +71,9 @@ export default class Frontpage extends React.Component {
 				<InputForm>
 					<Prompt>Enter your name: </Prompt>
 					<Input onChange={this.userInput}></Input>
-					<Submit type="submit">Enter</Submit>
+					<Submit onClick={this.userSubmit} type="submit">
+						Enter
+					</Submit>
 				</InputForm>
 			</Container>
 		);
