@@ -25,7 +25,7 @@ export default class App extends Component {
 		page = frontPage ? (
 			<Frontpage usernameFetch={this.usernameFetch} />
 		) : (
-			<Mainpage />
+			<Mainpage username={this.state.username} />
 		);
 		return <div>{page}</div>;
 	}

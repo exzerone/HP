@@ -6,7 +6,7 @@ export default class Mainpage extends Component {
 	render() {
 		return (
 			<div>
-				<Navbar />
+				<Navbar username={this.props.username} />
 			</div>
 		);
 	}
