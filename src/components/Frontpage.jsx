@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Input = styled.input`
@@ -44,11 +44,11 @@ const Prompt = styled.label`
 	font-family: lato;
 `;
 
-export default class Frontpage extends React.Component {
+export default class Frontpage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			query: null
+			query: ''
 		};
 		this.userInput = this.userInput.bind(this);
 		this.userSubmit = this.userSubmit.bind(this);
@@ -61,7 +61,11 @@ export default class Frontpage extends React.Component {
 
 	userSubmit(e) {
 		e.preventDefault();
-		this.props.usernameFetch(this.state.query)
+		if (this.state.query.length) {
+			this.props.usernameFetch(this.state.query);
+		} else {
+			window.alert('Please enter your name!');
+		}
 	}
 
 	render() {
