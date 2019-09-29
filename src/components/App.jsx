@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Frontpage from './Frontpage.jsx';
+import Mainpage from './Mainpage.jsx';
 
-export default class App extends React.Component {
+export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -14,7 +15,7 @@ export default class App extends React.Component {
 
 	usernameFetch(username) {
 		if (!this.state.username) {
-			this.setState({ username, firstPage: false });
+			this.setState({ username, frontPage: false });
 		}
 	}
 
@@ -22,9 +23,9 @@ export default class App extends React.Component {
 		const frontPage = this.state.frontPage;
 		let page;
 		page = frontPage ? (
-			<Frontpage usernameFetch={this.usernameFetch}></Frontpage>
+			<Frontpage usernameFetch={this.usernameFetch} />
 		) : (
-			<div>Hi</div>
+			<Mainpage />
 		);
 		return <div>{page}</div>;
 	}
