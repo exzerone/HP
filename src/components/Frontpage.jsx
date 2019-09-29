@@ -48,6 +48,16 @@ export default class Frontpage extends React.Component {
 		this.state = {
 			username: null
 		};
+		this.userInput = this.userInput.bind(this);
+	}
+
+	userInput(e) {
+		e.preventDefault();
+		this.setState({ username: e.target.value });
+	}
+
+	userSubmit(e) {
+		e.preventDefault();
 	}
 
 	render() {
@@ -56,7 +66,7 @@ export default class Frontpage extends React.Component {
 				<Greeting>Please Log In To enter the site</Greeting>
 				<InputForm>
 					<Prompt>Enter your name: </Prompt>
-					<Input></Input>
+					<Input onChange={this.userInput}></Input>
 					<Submit type="submit">Enter</Submit>
 				</InputForm>
 			</Container>

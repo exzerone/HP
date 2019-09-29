@@ -5,7 +5,9 @@ export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			firstPage: true
+			username:null,
+			firstPage: true,
+			productPage: false
 		};
 	}
 
