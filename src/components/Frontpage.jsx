@@ -38,10 +38,10 @@ const Input = styled.input`
 `;
 
 const Submit = styled.button`
-	height: 37px;
+	position: absolute;
+	height: 36px;
 	background-color: #fff;
 `;
-
 
 const Prompt = styled.label`
 	font-size: 23px;
