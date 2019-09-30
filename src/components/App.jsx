@@ -7,7 +7,7 @@ export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: null,
+			username: '',
 			frontPage: true,
 			productPage: false,
 			mainPage: false,
@@ -24,24 +24,6 @@ export default class App extends Component {
 
 	render() {
 		let page;
-		// if (this.state.productPage) {
-		// 	page = (
-		// 		<ProductDetail
-		// 			data={this.state.productData}
-		// 			returnMainPage={this.returnMainPage}
-		// 		/>
-		// 	);
-		// } else if (this.state.mainPage) {
-		// 	page = <ProductDetail />;
-		// 	page = (
-		// <Mainpage
-		// 	productPageFetch={this.productPageFetch}
-		// 	username={this.state.username}
-		// />
-		// 	);
-		// } else {
-		// 	page = <Frontpage usernameFetch={this.usernameFetch} />;
-		// }
 		page = !this.state.mainPage ? (
 			<Frontpage usernameFetch={this.usernameFetch} />
 		) : (
