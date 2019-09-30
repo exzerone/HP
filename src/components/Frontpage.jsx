@@ -67,7 +67,7 @@ export default class Frontpage extends Component {
 
 	userSubmit(e) {
 		e.preventDefault();
-		if (this.state.query.length) {
+		if (/\S/.test(this.state.query)) {
 			this.props.usernameFetch(this.state.query);
 		} else {
 			window.alert('Please enter your name!');
