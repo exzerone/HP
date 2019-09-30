@@ -5,7 +5,7 @@ const Product = styled.div`
 	display: flex;
 	flex-direction: column;
 	background-color: #ffffff;
-	width: 300px;
+	width: 270px;
 	height: 510px;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -27,7 +27,7 @@ const Information = styled.div`
 `;
 
 const Image = styled.img`
-	width: 80%;
+	width: 100%;
 	height: 50%;
 `;
 
