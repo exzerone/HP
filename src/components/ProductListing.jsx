@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Carousel from 'nuka-carousel';
 
 const Product = styled.div`
 	display: flex;
@@ -72,17 +73,25 @@ export default class ProductListing extends Component {
 	render() {
 		return (
 			<Product>
-				<Image
+				{/* <Image
 					onClick={this.productDetailPageFetch}
 					src={this.props.data.media[0].sizes[3].url}
 					alt=""
-				/>
+				/> */}
+				<Carousel >
+					{this.props.data.media.map((photos) => (
+						<Image
+							onClick={this.productDetailPageFetch}
+							src={photos.sizes[3].url}
+						/>
+					))}
+				</Carousel>
 				<Information>
 					<Title onClick={this.productDetailPageFetch}>
 						{this.props.data.title}
 					</Title>
 					<Price>${this.props.data.price}</Price>
-					<Date>{this.props.data.created_at}</Date>
+					<Date>Posted at: {this.props.data.created_at}</Date>
 				</Information>
 			</Product>
 		);
