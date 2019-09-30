@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import ProductDetail from './ProductDetail.jsx';
 
 const Container = styled.div`
-	padding-top: 100px;
+	padding-top: 70px;
 	display: flex;
 	flex-wrap: wrap;
 	background-color: #fbfbfb;
@@ -21,6 +21,7 @@ export default class Mainpage extends Component {
 			individualData: null
 		};
 		this.productPageFetch = this.productPageFetch.bind(this);
+		this.returnToMain = this.returnToMain.bind(this);
 	}
 
 	componentDidMount() {
@@ -36,6 +37,11 @@ export default class Mainpage extends Component {
 
 	productPageFetch(individualData) {
 		this.setState({ productDetailPage: true, individualData });
+	}
+
+	returnToMain(e) {
+		e.preventDefault();
+		this.setState({ productDetailPage: false });
 	}
 
 	render() {
@@ -55,7 +61,11 @@ export default class Mainpage extends Component {
 		);
 		return (
 			<div>
-				<Navbar username={this.props.username} />
+				<Navbar
+					returnToMain = {this.returnToMain}
+					productDetailPage={this.state.productDetailPage}
+					username={this.props.username}
+				/>
 				{page}
 			</div>
 		);

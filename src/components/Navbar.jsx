@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
 	display: flex;
+	flex-flow: row;
 	justify-content: flex-end;
 	align-items: center;
 	background-color: #fff;
@@ -29,6 +30,13 @@ const User = styled.div`
 	margin-right: 30px;
 `;
 
+const ReturnToMain = styled.button`
+	height: 40px;
+	width: 140px;
+	border-radius: 15px 15px 15px 15px;
+	margin: 10px 65% 10px 10px;
+`;
+
 export default class Navbar extends Component {
 	constructor(props) {
 		super(props);
@@ -40,6 +48,11 @@ export default class Navbar extends Component {
 	render() {
 		return (
 			<Container>
+				{this.props.productDetailPage ? (
+					<ReturnToMain onClick={this.props.returnToMain}>Go Back</ReturnToMain>
+				) : (
+					<div></div>
+				)}
 				<User>{`Welcome, ${this.props.username}`}</User>
 				<UserHistory>See All Users</UserHistory>
 			</Container>
