@@ -3,6 +3,7 @@ import Navbar from './Navbar.jsx';
 import Axios from 'axios';
 import ProductListing from './ProductListing.jsx';
 import styled from 'styled-components';
+import ProductDetail from './ProductDetail.jsx';
 
 const Container = styled.div`
 	padding-top: 100px;
@@ -15,32 +16,47 @@ export default class Mainpage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			productData: []
+			productDetailPage: false,
+			productData: [],
+			individualData: null
 		};
+		this.productPageFetch = this.productPageFetch.bind(this);
 	}
 
 	componentDidMount() {
 		Axios.get('/products')
 			.then((result) => {
 				const { data } = result;
-				this.setState({ productData: data }, () => {
-					console.log('this is this state', this.state.productData);
-				});
+				this.setState({ productData: data }, () => {});
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	}
 
+	productPageFetch(individualData) {
+		this.setState({ productDetailPage: true, individualData });
+	}
+
 	render() {
+		let page;
+		page = this.state.productDetailPage ? (
+			<ProductDetail data={this.state.individualData} />
+		) : (
+			<Container>
+				{this.state.productData.map((item, index) => (
+					<ProductListing
+						productPageFetch={this.productPageFetch}
+						key={index}
+						data={item}
+					></ProductListing>
+				))}
+			</Container>
+		);
 		return (
 			<div>
 				<Navbar username={this.props.username} />
-				<Container>
-					{this.state.productData.map((item, index) => (
-						<ProductListing key={index} data={item}></ProductListing>
-					))}
-				</Container>
+				{page}
 			</div>
 		);
 	}

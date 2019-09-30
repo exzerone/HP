@@ -73,14 +73,10 @@ export default class ProductListing extends Component {
 	render() {
 		return (
 			<Product>
-				{/* <Image
-					onClick={this.productDetailPageFetch}
-					src={this.props.data.media[0].sizes[3].url}
-					alt=""
-				/> */}
-				<Carousel >
-					{this.props.data.media.map((photos) => (
+				<Carousel dragging={true}>
+					{this.props.data.media.map((photos, index) => (
 						<Image
+							key = {index}
 							onClick={this.productDetailPageFetch}
 							src={photos.sizes[3].url}
 						/>
