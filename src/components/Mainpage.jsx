@@ -5,8 +5,10 @@ import ProductListing from './ProductListing.jsx';
 import styled from 'styled-components';
 
 const Container = styled.div`
+	padding-top: 100px;
 	display: flex;
 	flex-wrap: wrap;
+	background-color: #fbfbfb;
 `;
 
 export default class Mainpage extends Component {
