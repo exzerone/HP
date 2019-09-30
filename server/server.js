@@ -1,6 +1,6 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const morgan = require('morgan');
+const Mongo = require('../database/index.js');
 
 const app = express();
 
