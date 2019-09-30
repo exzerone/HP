@@ -27,15 +27,23 @@ const Information = styled.div`
 `;
 
 const Image = styled.img`
+	cursor: pointer;
 	width: 100%;
 	height: 50%;
+	&:hover {
+		background-color: lightgrey;
+	}
 `;
 
 const Title = styled.a`
+	cursor: pointer;
 	font-family: lato;
 	font-size: 20px;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	&:hover {
+		text-decoration: underline;
+	}
 `;
 
 const Price = styled.div`
@@ -45,7 +53,6 @@ const Price = styled.div`
 	font-weight: bold;
 `;
 
-
 const Date = styled.div`
 	margin-top: 15px;
 	font-size: 10px;
@@ -54,14 +61,26 @@ const Date = styled.div`
 export default class ProductListing extends Component {
 	constructor(props) {
 		super(props);
+		this.productDetailPageFetch = this.productDetailPageFetch.bind(this);
+	}
+
+	productDetailPageFetch(e) {
+		e.preventDefault();
+		this.props.productPageFetch(this.props.data);
 	}
 
 	render() {
 		return (
 			<Product>
-				<Image src={this.props.data.media[0].sizes[3].url} alt="" />
+				<Image
+					onClick={this.productDetailPageFetch}
+					src={this.props.data.media[0].sizes[3].url}
+					alt=""
+				/>
 				<Information>
-					<Title>{this.props.data.title}</Title>
+					<Title onClick={this.productDetailPageFetch}>
+						{this.props.data.title}
+					</Title>
 					<Price>${this.props.data.price}</Price>
 					<Date>{this.props.data.created_at}</Date>
 				</Information>
