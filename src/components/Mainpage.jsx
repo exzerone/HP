@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar.jsx';
 import Axios from 'axios';
-import ProductListing from './ProductListing.jsx';
 import styled from 'styled-components';
+import Navbar from './Navbar.jsx';
+import ProductListing from './ProductListing.jsx';
 import ProductDetail from './ProductDetail.jsx';
+import Pagination from './Pagination.jsx';
 
 const Container = styled.div`
 	padding-top: 70px;
@@ -18,17 +19,24 @@ export default class Mainpage extends Component {
 		this.state = {
 			productDetailPage: false,
 			productData: [],
-			individualData: null
+			individualData: null,
+			currentPage: 0,
+			totalItem: null
 		};
 		this.productPageFetch = this.productPageFetch.bind(this);
 		this.returnToMain = this.returnToMain.bind(this);
+		this.renderItemsPerPage = this.renderItemsPerPage.bind(this);
+		this.changePage = this.changePage.bind(this);
 	}
 
 	componentDidMount() {
 		Axios.get('/products')
 			.then((result) => {
 				const { data } = result;
-				this.setState({ productData: data }, () => {});
+				this.setState(
+					{ totalItem: data.length },
+					this.renderItemsPerPage(data)
+				);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -42,6 +50,19 @@ export default class Mainpage extends Component {
 	returnToMain(e) {
 		e.preventDefault();
 		this.setState({ productDetailPage: false });
+	}
+
+	changePage(currentPage) {
+		e.preventDefault();
+		this.setState({ currentPage });
+	}
+
+	renderItemsPerPage(data) {
+		let productData = data.slice(
+			this.state.currentPage * 20,
+			this.state.currentPage * 20 + 20
+		);
+		this.setState({ productData });
 	}
 
 	render() {
@@ -62,11 +83,18 @@ export default class Mainpage extends Component {
 		return (
 			<div>
 				<Navbar
-					returnToMain = {this.returnToMain}
+					returnToMain={this.returnToMain}
 					productDetailPage={this.state.productDetailPage}
 					username={this.props.username}
 				/>
 				{page}
+				<Pagination
+					currentPage={this.state.currentPage}
+					changePage={this.changePage}
+					data={this.state.productData}
+					itemPerPage={20}
+					totalItem={this.state.totalItem}
+				/>
 			</div>
 		);
 	}
