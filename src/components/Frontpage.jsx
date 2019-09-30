@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const Input = styled.input`
-	width: 200px;
-	height: 30px;
-`;
-
-const Submit = styled.button`
-	height: 37px;
-
-	background-color: white;
-`;
-
 const Container = styled.div`
+	position: absolute;
+	top: 150px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -37,6 +28,20 @@ const Greeting = styled.div`
 const InputForm = styled.form`
 	text-align: center;
 `;
+
+const Input = styled.input`
+	width: 200px;
+	height: 30px;
+	margin-left: 10px;
+	font-size: 20px;
+	font-weight: normal;
+`;
+
+const Submit = styled.button`
+	height: 37px;
+	background-color: #fff;
+`;
+
 
 const Prompt = styled.label`
 	font-size: 23px;
@@ -70,11 +75,11 @@ export default class Frontpage extends Component {
 
 	render() {
 		return (
-			<Container>
+			<Container className="container">
 				<Greeting>Please Log In To enter the site</Greeting>
 				<InputForm>
 					<Prompt>Enter your name: </Prompt>
-					<Input onChange={this.userInput}></Input>
+					<Input type="text" onChange={this.userInput}></Input>
 					<Submit onClick={this.userSubmit} type="submit">
 						Enter
 					</Submit>
