@@ -27,6 +27,7 @@ const Greeting = styled.div`
 
 const InputForm = styled.form`
 	text-align: center;
+	margin-right: 40px;
 `;
 
 const Input = styled.input`
