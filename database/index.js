@@ -10,5 +10,16 @@ MongoClient.connect(
 
 		let db = client.db(dbName);
 		console.log(`Connected MongoDB database: ${dbName}`);
+
+		let get = (cb) => {
+			db.collection('data')
+				.find()
+				.limit(3)
+				.toArray((err, result) => {
+					if (err) cb(err);
+					cb(null, result);
+				});
+		};
+		module.exports.get = get;
 	}
 );
