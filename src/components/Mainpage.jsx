@@ -20,7 +20,7 @@ export default class Mainpage extends Component {
 			productDetailPage: false,
 			productData: [],
 			individualData: null,
-			currentPage: 0,
+			currentPage: 1,
 			totalItem: null
 		};
 		this.productPageFetch = this.productPageFetch.bind(this);
@@ -53,14 +53,14 @@ export default class Mainpage extends Component {
 	}
 
 	changePage(currentPage) {
-		e.preventDefault();
+		console.log(currentPage);
 		this.setState({ currentPage });
 	}
 
 	renderItemsPerPage(data) {
 		let productData = data.slice(
-			this.state.currentPage * 20,
-			this.state.currentPage * 20 + 20
+			(this.state.currentPage - 1) * 5,
+			(this.state.currentPage - 1) * 5 + 5
 		);
 		this.setState({ productData });
 	}
@@ -92,8 +92,8 @@ export default class Mainpage extends Component {
 					currentPage={this.state.currentPage}
 					changePage={this.changePage}
 					data={this.state.productData}
-					itemPerPage={20}
 					totalItem={this.state.totalItem}
+					totalPage={this.state.totalItem / 5}
 				/>
 			</div>
 		);

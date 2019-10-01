@@ -17,8 +17,7 @@ export default class Pagination extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentPage: this.props.currentPage,
-			totalPage: this.props.data.length / this.props.itemPerPage
+			currentPage: 1
 		};
 		this.handleClick = this.handleClick.bind(this);
 		this.renderPage = this.renderPage.bind(this);
@@ -26,7 +25,7 @@ export default class Pagination extends Component {
 
 	renderPage() {
 		let pages = [];
-		for (let i = 1; i <= this.props.totalItem / this.props.itemPerPage; i++) {
+		for (let i = 1; i <= this.props.totalPage; i++) {
 			pages.push(
 				<li key={i} onClick={this.handleClick}>
 					<a id={i}>{i}</a>
@@ -37,13 +36,19 @@ export default class Pagination extends Component {
 	}
 
 	handleClick(e) {
+		e.preventDefault();
 		let currentPage = this.state.currentPage;
-		currentPage =
-			e.target.id === 'nextButton' ? currentPage + 1 : currentPage - 1;
-		if (Number(e.target.id) !== NaN) {
-			currentPage = Number(e.target.id);
+		if (Number(e.target.id)) currentPage = Number(e.target.id);
+		if (e.target.id === 'prevButton') {
+			if (currentPage > 1) {
+				currentPage--;
+			}
+		} else if (e.target.id === 'nextButton') {
+			if (currentPage < this.props.totalPage) {
+				currentPage++;
+			}
 		}
-		this.props.changePage(currentPage);
+		this.setState({ currentPage }, this.props.changePage(currentPage));
 	}
 
 	render() {

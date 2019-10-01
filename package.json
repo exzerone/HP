@@ -12,9 +12,11 @@
 		"mongodb": "^3.3.2",
 		"mongoose": "^5.7.1",
 		"morgan": "^1.9.1",
+		"nuka-carousel": "^4.5.12",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"react-scripts": "3.0.1",
+		"simple-react-paginate": "^1.0.0",
 		"styled-components": "^4.4.0",
 		"webpack": "^4.38.0"
 	},
