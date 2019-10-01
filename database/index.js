@@ -19,6 +19,14 @@ MongoClient.connect(
 					cb(null, result);
 				});
 		};
+
+		let post = (username, cb) => {
+			db.collection('users').save({ user: username }, (err, response) => {
+				if (err) cb(err);
+				cb(null, response);
+			});
+		};
 		module.exports.get = get;
+		module.exports.post = post;
 	}
 );

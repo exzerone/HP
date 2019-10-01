@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Frontpage from './Frontpage.jsx';
 import Mainpage from './Mainpage.jsx';
-import ProductDetail from './ProductDetail.jsx';
+import Axios from 'axios';
 
 export default class App extends Component {
 	constructor(props) {
@@ -17,9 +17,14 @@ export default class App extends Component {
 	}
 
 	usernameFetch(username) {
-		if (!this.state.username) {
-			this.setState({ username, mainPage: true });
-		}
+		Axios.post('/user', { user: username })
+			.then((result) => {
+				console.log(result);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+		this.setState({ username, mainPage: true });
 	}
 
 	render() {
