@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.ul`
+	visibility: ${(props) => (props.productDetail ? 'hidden' : 'visible')};
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -53,7 +54,7 @@ export default class Pagination extends Component {
 
 	render() {
 		return (
-			<Container>
+			<Container productDetail={this.props.productDetail}>
 				<li onClick={this.handleClick} id="prevButton">
 					{'<'}
 				</li>

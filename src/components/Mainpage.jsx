@@ -96,6 +96,7 @@ export default class Mainpage extends Component {
 					data={this.state.productData}
 					totalItem={this.state.totalCount}
 					totalPage={this.state.totalCount / 20}
+					productDetail={this.state.productDetailPage}
 				/>
 			</div>
 		);
