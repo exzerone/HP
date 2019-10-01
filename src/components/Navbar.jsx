@@ -21,6 +21,7 @@ const UserHistory = styled.button`
 	width: 140px;
 	border-radius: 15px 15px 15px 15px;
 	margin: 10px 10px 10px 10px;
+	cursor: pointer;
 `;
 
 const User = styled.div`
@@ -35,6 +36,7 @@ const ReturnToMain = styled.button`
 	width: 140px;
 	border-radius: 15px 15px 15px 15px;
 	margin: 10px 65% 10px 10px;
+	cursor: pointer;
 `;
 
 export default class Navbar extends Component {
