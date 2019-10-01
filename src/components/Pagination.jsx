@@ -8,9 +8,15 @@ const Container = styled.ul`
 	justify-content: center;
 	list-style-type: none;
 	li {
+		cursor: pointer;
 		margin-left: 0.5%;
 		margin-right: 0.5%;
-		font-size: 1em;
+		font-size: 20px;
+		color: #999;
+		&:hover {
+			color: #333;
+			text-decoration: underline;
+		}
 	}
 `;
 
