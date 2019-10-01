@@ -5,12 +5,25 @@ import Navbar from './Navbar.jsx';
 import ProductListing from './ProductListing.jsx';
 import ProductDetail from './ProductDetail.jsx';
 import Pagination from './Pagination.jsx';
+import Sort from './Sort.jsx';
+import _ from 'lodash';
 
-const Container = styled.div`
-	padding-top: 70px;
+const MainContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	background-color: #fbfbfb;
+`;
+
+const ProductsContainer = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	background-color: #fbfbfb;
+`;
+
+const SortContainer = styled.div`
+	display: flex;
+	justify-content: flex-start;
+	height: 70px;
+	width: 100%;
 `;
 
 export default class Mainpage extends Component {
@@ -22,12 +35,14 @@ export default class Mainpage extends Component {
 			individualData: null,
 			currentPage: 1,
 			totalItem: null,
-			totalCount: 0
+			totalCount: 0,
+			defaultSort: 'low_price'
 		};
 		this.productPageFetch = this.productPageFetch.bind(this);
 		this.returnToMain = this.returnToMain.bind(this);
 		this.renderItemsPerPage = this.renderItemsPerPage.bind(this);
 		this.changePage = this.changePage.bind(this);
+		this.sortProducts = this.sortProducts.bind(this);
 	}
 
 	componentDidMount() {
@@ -36,13 +51,19 @@ export default class Mainpage extends Component {
 				const { data } = result;
 				this.setState(
 					{ totalItem: data, totalCount: data.length },
-					this.renderItemsPerPage(data)
+					this.sortProducts(data, this.state.defaultSort)
 				);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	}
+
+	// componentDidUpdate(prevProps, prevStates) {
+	// 	if (!_.isEqual(this.state.productData, prevStates.productData)) {
+	// 		this.sortProducts(this.state.productData, this.state.defaultSort);
+	// 	}
+	// }
 
 	productPageFetch(individualData) {
 		this.setState({ productDetailPage: true, individualData });
@@ -60,11 +81,38 @@ export default class Mainpage extends Component {
 	}
 
 	renderItemsPerPage(data) {
+		//limit 20 items per page
 		let productData = data.slice(
-			(this.state.currentPage - 1) * 20,
-			(this.state.currentPage - 1) * 20 + 20
+			(this.state.currentPage - 1) * 10,
+			(this.state.currentPage - 1) * 10 + 10
 		);
 		this.setState({ productData });
+	}
+
+	sortProducts(data = this.state.totalItem, sorting) {
+		let result;
+		if (sorting === 'high_price') {
+			result = data.sort((a, b) => b['price'] - a['price']);
+		} else if (sorting === 'low_price') {
+			result = data.sort((a, b) => a['price'] - b['price']);
+		} else if (sorting === 'seller') {
+			result = data.sort((a, b) => {
+				if (a['seller']['first_name'] < b['seller']['first_name']) {
+					return -1;
+				}
+			});
+			console.log(result);
+		} else if (sorting === 'title') {
+			result = data.sort((a, b) => {
+				if (a['title'] < b['title']) {
+					return -1;
+				}
+			});
+			console.log(result);
+		}else {
+			result = data.sort((a, b) => a[sorting] - b[sorting]);
+		}
+		this.renderItemsPerPage(result);
 	}
 
 	render() {
@@ -72,15 +120,23 @@ export default class Mainpage extends Component {
 		page = this.state.productDetailPage ? (
 			<ProductDetail data={this.state.individualData} />
 		) : (
-			<Container>
-				{this.state.productData.map((item, index) => (
-					<ProductListing
-						productPageFetch={this.productPageFetch}
-						key={index}
-						data={item}
-					></ProductListing>
-				))}
-			</Container>
+			<MainContainer>
+				<SortContainer>
+					<Sort
+						sortProducts={this.sortProducts}
+						renderItemsPerPage={this.renderItemsPerPage}
+					/>
+				</SortContainer>
+				<ProductsContainer>
+					{this.state.productData.map((item, index) => (
+						<ProductListing
+							productPageFetch={this.productPageFetch}
+							key={index}
+							data={item}
+						/>
+					))}
+				</ProductsContainer>
+			</MainContainer>
 		);
 		return (
 			<div>
@@ -95,7 +151,7 @@ export default class Mainpage extends Component {
 					changePage={this.changePage}
 					data={this.state.productData}
 					totalItem={this.state.totalCount}
-					totalPage={this.state.totalCount / 20}
+					totalPage={this.state.totalCount / 10}
 					productDetail={this.state.productDetailPage}
 				/>
 			</div>
