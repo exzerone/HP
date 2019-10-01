@@ -14,7 +14,6 @@ MongoClient.connect(
 		let get = (cb) => {
 			db.collection('data')
 				.find()
-				.limit(10)
 				.toArray((err, result) => {
 					if (err) cb(err);
 					cb(null, result);
