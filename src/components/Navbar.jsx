@@ -24,6 +24,7 @@ const User = styled.div`
 `;
 
 const ReturnToMain = styled.button`
+	outline: none;
 	height: 40px;
 	width: 140px;
 	border-radius: 15px 15px 15px 15px;
@@ -50,6 +51,7 @@ const UserMenu = styled.div`
 	position: absolute;
 	top: 45px;
 	visibility: ${(props) => (props.expand === false ? 'hidden' : 'visible')};
+	z-index: 10;
 	width: 140px;
 	height: auto;
 	display: flex;

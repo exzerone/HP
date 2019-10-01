@@ -31,6 +31,7 @@ const InputForm = styled.form`
 `;
 
 const Input = styled.input`
+	outline: none;
 	width: 200px;
 	height: 30px;
 	margin-left: 10px;
@@ -40,6 +41,7 @@ const Input = styled.input`
 
 const Submit = styled.button`
 	position: absolute;
+	outline: none;
 	height: 36px;
 	background-color: #fff;
 `;
