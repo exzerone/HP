@@ -35,7 +35,9 @@ const Title = styled.h1`
 const Price = styled.div`
 	color: #d7410b;
 	font-weight: 100;
-	font-size: 2.25em;
+	font-size: 23px;
+	margin-top: 5%;
+	cursor: pointer;
 	&:hover {
 		text-decoration: underline;
 	}
