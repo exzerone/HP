@@ -36,7 +36,8 @@ export default class Mainpage extends Component {
 			currentPage: 1,
 			totalItem: null,
 			totalCount: 0,
-			defaultSort: 'low_price'
+			defaultSort: 'low_price',
+			userList: []
 		};
 		this.productPageFetch = this.productPageFetch.bind(this);
 		this.returnToMain = this.returnToMain.bind(this);
@@ -46,24 +47,24 @@ export default class Mainpage extends Component {
 	}
 
 	componentDidMount() {
-		Axios.get('/products')
-			.then((result) => {
-				const { data } = result;
-				this.setState(
-					{ totalItem: data, totalCount: data.length },
-					this.sortProducts(data, this.state.defaultSort)
-				);
-			})
+		Axios.all([Axios.get('/products'), Axios.get('/userList')])
+			.then(
+				Axios.spread((products, userList) => {
+					console.log(userList.data);
+					this.setState(
+						{
+							totalItem: products.data,
+							totalCount: products.data.length,
+							userList: userList.data
+						},
+						this.sortProducts(products.data, this.state.defaultSort)
+					);
+				})
+			)
 			.catch((err) => {
 				console.log(err);
 			});
 	}
-
-	// componentDidUpdate(prevProps, prevStates) {
-	// 	if (!_.isEqual(this.state.productData, prevStates.productData)) {
-	// 		this.sortProducts(this.state.productData, this.state.defaultSort);
-	// 	}
-	// }
 
 	productPageFetch(individualData) {
 		this.setState({ productDetailPage: true, individualData });
@@ -109,7 +110,7 @@ export default class Mainpage extends Component {
 				}
 			});
 			console.log(result);
-		}else {
+		} else {
 			result = data.sort((a, b) => a[sorting] - b[sorting]);
 		}
 		this.renderItemsPerPage(result);
@@ -141,6 +142,7 @@ export default class Mainpage extends Component {
 		return (
 			<div>
 				<Navbar
+					userList={this.state.userList}
 					returnToMain={this.returnToMain}
 					productDetailPage={this.state.productDetailPage}
 					username={this.props.username}
@@ -150,7 +152,6 @@ export default class Mainpage extends Component {
 					currentPage={this.state.currentPage}
 					changePage={this.changePage}
 					data={this.state.productData}
-					totalItem={this.state.totalCount}
 					totalPage={this.state.totalCount / 10}
 					productDetail={this.state.productDetailPage}
 				/>

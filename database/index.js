@@ -11,8 +11,17 @@ MongoClient.connect(
 		let db = client.db(dbName);
 		console.log(`Connected MongoDB database: ${dbName}`);
 
-		let get = (cb) => {
+		let getProduct = (cb) => {
 			db.collection('data')
+				.find()
+				.toArray((err, result) => {
+					if (err) cb(err);
+					cb(null, result);
+				});
+		};
+
+		let getUser = (cb) => {
+			db.collection('users')
 				.find()
 				.toArray((err, result) => {
 					if (err) cb(err);
@@ -26,7 +35,8 @@ MongoClient.connect(
 				cb(null, response);
 			});
 		};
-		module.exports.get = get;
+		module.exports.getProduct = getProduct;
 		module.exports.post = post;
+		module.exports.getUser = getUser;
 	}
 );

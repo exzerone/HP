@@ -16,7 +16,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/products', (req, res) => {
-	Mongo.get((err, result) => {
+	Mongo.getProduct((err, result) => {
+		if (err) console.log(err);
+		res.status(200).send(result);
+	});
+});
+
+app.get('/userList', (req, res) => {
+	Mongo.getUser((err, result) => {
 		if (err) console.log(err);
 		res.status(200).send(result);
 	});
