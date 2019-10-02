@@ -50,6 +50,7 @@ const UserHistory = styled.div`
 const UserMenu = styled.div`
 	position: absolute;
 	top: 45px;
+	right: 10px;
 	visibility: ${(props) => (props.expand === false ? 'hidden' : 'visible')};
 	z-index: 10;
 	width: 140px;
@@ -58,16 +59,28 @@ const UserMenu = styled.div`
 	flex-flow: column;
 	background-color: #f3f3f3de;
 	border-radius: 5px 5px 5px 5px;
+	a{
+		display: flex;
+		text-align: left;
+		font-size: 15px;
+	}
 `;
 
 const UserName = styled.li`
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
 	font-family: lato;
 	font-size: 17px;
-	height: 25px;
+	height: auto;
 	align-self: center;
+	border-style: solid;
+	border-width: 1px;
 `;
 
-const UserTag = styled.div``;
+const UserTag = styled.div`
+	font-family: lato;
+`;
 
 export default class Navbar extends Component {
 	constructor(props) {
@@ -97,7 +110,13 @@ export default class Navbar extends Component {
 					<UserTag>See All Users</UserTag>
 					<UserMenu className="userMenu" expand={this.state.historyExpand}>
 						{this.props.userList.map((user, index) => (
-							<UserName key={index}>{user.user}</UserName>
+							<UserName key={index}>
+								<a className="userName">
+									{user.user}
+									<span>&#183;</span>
+									{user.date}
+								</a>
+							</UserName>
 						))}
 					</UserMenu>
 				</UserHistory>

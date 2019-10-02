@@ -1,5 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://127.0.0.1:27017';
+const dateFns = require('date-fns');
 const dbName = 'hp';
 
 MongoClient.connect(
@@ -30,10 +31,16 @@ MongoClient.connect(
 		};
 
 		let post = (username, cb) => {
-			db.collection('users').save({ user: username }, (err, response) => {
-				if (err) cb(err);
-				cb(null, response);
-			});
+			db.collection('users').save(
+				{
+					user: username,
+					date: dateFns.format(new Date(), "LLL d, yyyy h:m aaaa")
+				},
+				(err, response) => {
+					if (err) cb(err);
+					cb(null, response);
+				}
+			);
 		};
 		module.exports.getProduct = getProduct;
 		module.exports.post = post;
