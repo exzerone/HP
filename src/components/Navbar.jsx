@@ -49,17 +49,19 @@ const UserHistory = styled.div`
 
 const UserMenu = styled.div`
 	position: absolute;
-	top: 45px;
+	z-index: 10;
+	top: 50px;
 	right: 10px;
 	visibility: ${(props) => (props.expand === false ? 'hidden' : 'visible')};
-	z-index: 10;
 	width: 140px;
 	height: auto;
 	display: flex;
 	flex-flow: column;
 	background-color: #f3f3f3de;
-	border-radius: 5px 5px 5px 5px;
-	a{
+	border-radius: 10px 10px 10px 10px;
+	border-style: solid;
+	border-width: 1px;
+	a {
 		display: flex;
 		text-align: left;
 		font-size: 15px;
@@ -67,19 +69,32 @@ const UserMenu = styled.div`
 `;
 
 const UserName = styled.li`
+	padding-top:7px;
+	padding-bottom: 7px;
 	display: flex;
 	flex-flow: column;
 	justify-content: center;
 	font-family: lato;
-	font-size: 17px;
 	height: auto;
+	width: 100%;
 	align-self: center;
-	border-style: solid;
+	border-bottom-style: solid;
 	border-width: 1px;
+	.userName {
+		font-size: 17px;
+		margin-left: 5px;
+	}
+	.time {
+		font-size: 12px;
+		margin-left: 5px;
+	}
 `;
 
 const UserTag = styled.div`
 	font-family: lato;
+	&:hover {
+		color: lightblue;
+	}
 `;
 
 export default class Navbar extends Component {
@@ -111,11 +126,8 @@ export default class Navbar extends Component {
 					<UserMenu className="userMenu" expand={this.state.historyExpand}>
 						{this.props.userList.map((user, index) => (
 							<UserName key={index}>
-								<a className="userName">
-									{user.user}
-									<span>&#183;</span>
-									{user.date}
-								</a>
+								<a className="userName">{user.user}</a>
+								<a className="time">{user.date}</a>
 							</UserName>
 						))}
 					</UserMenu>
