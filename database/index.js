@@ -34,7 +34,7 @@ MongoClient.connect(
 			db.collection('users').save(
 				{
 					user: username,
-					date: dateFns.format(new Date(), "LLL d, yyyy h:m aaaa")
+					date: dateFns.format(new Date(), "LLL d, yyyy h:mm aaaa")
 				},
 				(err, response) => {
 					if (err) cb(err);
